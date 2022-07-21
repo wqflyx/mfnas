@@ -83,7 +83,7 @@ def main():
             data = DataEncap(opt)
             train_queue, test_valid_queue = data.data_generate(is_search=False)
 
-        rewards = child.run_models([1], nums_epoch, train_queue, test_valid_queue)
+        rewards = child.run_models([0], nums_epoch, train_queue, test_valid_queue)
         sorted_idx = (-np.array(rewards)).argsort()
         print("reward:", rewards)
         print("sorted_idx", sorted_idx)
@@ -94,7 +94,7 @@ def main():
         rewards = [np.exp(-1 * (1 - reward_i) * (1 - reward_i)) for reward_i in rewards]
 
         end_time = time.time()
-        print("episode %d takes %f hours with %f rewards: " % (episode, (end_time - start_time) / 3600.0, rewards))
+        print("episode %d takes %f hours with %f rewards: " % (episode, (end_time - start_time) / 3600.0, rewards[0]))
 
 
 if __name__ == "__main__":
